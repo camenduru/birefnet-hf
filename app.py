@@ -1,7 +1,6 @@
 import gradio as gr
 from gradio_imageslider import ImageSlider
 from loadimg import load_img
-import spaces
 from transformers import AutoModelForImageSegmentation
 import torch
 from torchvision import transforms
@@ -21,7 +20,6 @@ transform_image = transforms.Compose(
 )
 
 
-@spaces.GPU
 def fn(image):
     im = load_img(image, output_type="pil")
     im = im.convert("RGB")
@@ -60,4 +58,4 @@ demo = gr.TabbedInterface(
 )
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.queue().launch(share=True)
